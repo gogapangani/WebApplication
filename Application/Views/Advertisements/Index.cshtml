@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Application.Models.Advertisement>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<form asp-controller="Advertisements" asp-action="Index">
+    <p>
+        Title: <input type="text" name="titleFIlter">
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImagePath)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    <img src="@Url.Content(item.ImagePath)" alt="Image" />
+                    @*<img src="~/Content/img/@Html.DisplayFor(model =>item.ImagePath)" style="height:50px;width:50px;" />*@
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
